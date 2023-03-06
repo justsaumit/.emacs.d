@@ -43,3 +43,44 @@
   (dashboard-setup-startup-hook)
   (setq dashboard-startup-banner "~/.emacs.d/dracon.png")
   (setq dashboard-banner-logo-title "while(!(succeed = try() ) );"))
+
+;; Save History
+(savehist-mode +1)
+(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
+
+;; Set the default directory
+;;(setq default-directory "/home/saumit/")
+
+;; Package directory
+(add-to-list 'load-path "/home/saumit/.emacs.d/Packages")
+
+;; Basic modes
+(blink-cursor-mode -1)
+(column-number-mode +1)
+(global-goto-address-mode +1) ;; allows access to urls within text files like https://draconyan.xyz
+(global-visual-line-mode +1) ;; better wrapping around words
+(delete-selection-mode +1)    ;; replace selected text on typing
+(save-place-mode +1)          ;; save cursor location in every file
+
+;; Recent files
+(recentf-mode 1)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+
+;; Set UTF-8 encoding
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8)
+(set-keyboard-coding-system 'utf-8-unix)
+(set-terminal-coding-system 'utf-8-unix)
+
+;; Backups
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+(setq delete-old-versions -1)
+(setq version-control t)
+(setq vc-make-backup-files t)
+(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+
+;; Quickly access init.el
+(global-set-key (kbd "C-c d")
+		(lambda()
+		  (interactive)
+		  (find-file "~/.emacs.d/init.el")))
