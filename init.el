@@ -1,3 +1,4 @@
+(setq user-full-name "Saumit Dinesan")
 ;; Disable splashscreen
 (setq inhibit-startup-message t)
 ;; Disable menu menu-bar and tool-bar and scrollbar
@@ -28,7 +29,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(dashboard use-package)))
+ '(package-selected-packages '(lsp-java lsp-mode dashboard use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -62,10 +63,6 @@
 (delete-selection-mode +1)    ;; replace selected text on typing
 (save-place-mode +1)          ;; save cursor location in every file
 
-;; Recent files
-(recentf-mode 1)
-(global-set-key "\C-x\ \C-r" 'recentf-open-files)
-
 ;; Set UTF-8 encoding
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
@@ -84,3 +81,35 @@
 		(lambda()
 		  (interactive)
 		  (find-file "~/.emacs.d/init.el")))
+
+;; Recent files
+(recentf-mode 1)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+
+;; y/n instead of yes/no
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; Global keys
+;; If you use a window manager be careful of possible key binding clashes
+(setq recenter-positions '(top middle bottom))
+(global-set-key (kbd "C-1") 'kill-this-buffer)
+(global-set-key (kbd "C-<down>") (kbd "C-u 1 C-v")) ;; scroll w ctrl<up/down>
+(global-set-key (kbd "C-<up>") (kbd "C-u 1 M-v"))
+(global-set-key [C-tab] 'other-window) ;; change window
+(global-set-key (kbd "C-c c") 'calendar)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+;;; packages
+
+;;Smex - M-x enhancer
+(use-package smex
+  :ensure t
+  :init (smex-initialize)
+  :bind
+  ("M-x" . smex))
+
+;;LSP - Language Server Protocol
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :commands lsp)
