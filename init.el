@@ -35,3 +35,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Custom Startup Dashboard
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-startup-banner "~/.emacs.d/dracon.png")
+  (setq dashboard-banner-logo-title "while(!(succeed = try() ) );"))
