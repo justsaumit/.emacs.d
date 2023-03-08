@@ -65,12 +65,14 @@
 (global-set-key (kbd "C-1") 'kill-this-buffer)
 (global-set-key (kbd "C-<down>") (kbd "C-u 1 C-v")) ;; scroll w ctrl<up/down>
 (global-set-key (kbd "C-<up>") (kbd "C-u 1 M-v"))
-(global-set-key [C-tab] 'other-window) ;; change window
+(global-set-key (kbd "C-<tab>") 'other-window) ;; change window
 (global-set-key (kbd "C-c c") 'calendar)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 
-;;; packages
+ ;;;;;;;;;;;;;;
+ ;; packages ;;
+ ;;;;;;;;;;;;;;
 
 
 ;; Melpa setup
@@ -78,7 +80,9 @@
 (setq package-enable-at-startup nil)
 
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
+             '(("melpa" . "https://melpa.org/packages/")
+               ("elpa" . "https://elpa.gnu.org/packages/")
+               ("org" . "https://orgmode.org/elpa/")))
 (package-initialize)
 
 ;; Easy Package Management
@@ -105,7 +109,31 @@
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "C-c l")
-  :commands lsp)
+  :commands lsp
+  :ensure t)
+(use-package lsp-ui :ensure t)
+
+;; Vertico - Emacs completion(Uses GNU elpa)
+(use-package vertico
+  :ensure t
+  :bind (:map vertico-map
+         ("C-j" . vertico-next)
+         ("C-k" . vertico-previous)
+         ("C-f" . vertico-exit)
+         :map minibuffer-local-map
+         ("M-h" . backward-kill-word))
+  :custom
+  (vertico-cycle t)
+  :init
+  (vertico-mode))
+;; Marginalia - Extra info for completion buffer by Vertico
+(use-package marginalia
+  :after vertico
+  :ensure t
+  :custom
+  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+  :init
+  (marginalia-mode))
 
 ;;Auto written by emacs
 (custom-set-variables
