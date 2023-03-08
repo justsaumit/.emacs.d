@@ -25,7 +25,7 @@
 (blink-cursor-mode -1)
 (column-number-mode +1)
 (global-goto-address-mode +1) ;; allows access to urls within text files like https://draconyan.xyz
-(global-visual-line-mode +1) ;; better wrapping around words
+(global-visual-line-mode +1)  ;; better wrapping around words
 (delete-selection-mode +1)    ;; replace selected text on typing
 (save-place-mode +1)          ;; save cursor location in every file
 
@@ -134,6 +134,15 @@
   (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
   :init
   (marginalia-mode))
+
+;; spaceline
+(use-package spaceline
+  :ensure t
+  :config
+  (require 'spaceline-config)
+  (setq powerline-default-separator (quote arrow))
+  (spaceline-spacemacs-theme))
+
 
 ;;Auto written by emacs
 (custom-set-variables
