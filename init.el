@@ -5,6 +5,7 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+(set-fringe-mode 10)
 
 ;; Set JetBrains mono as default font
 (add-to-list 'default-frame-alist
@@ -40,6 +41,10 @@
 (setq version-control t)
 (setq vc-make-backup-files t)
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+
+;; relativenumberline
+(global-display-line-numbers-mode)
+(setq display-line-numbers-type 'relative)
 
 ;; Quickly access init.el
 (global-set-key (kbd "C-c d")
