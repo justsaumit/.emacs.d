@@ -79,10 +79,10 @@
 (require 'package)
 (setq package-enable-at-startup nil)
 
-(add-to-list 'package-archives
-             '(("melpa" . "https://melpa.org/packages/")
-               ("elpa" . "https://elpa.gnu.org/packages/")
-               ("org" . "https://orgmode.org/elpa/")))
+(setq package-archives
+      '(("melpa" . "https://melpa.org/packages/")
+	("elpa" . "https://elpa.gnu.org/packages/")
+	("org" . "https://orgmode.org/elpa/")))
 (package-initialize)
 
 ;; Easy Package Management
@@ -135,15 +135,20 @@
   :init
   (marginalia-mode))
 
-;; spaceline
-(use-package spaceline
+;; doom-modeline
+(use-package doom-modeline
   :ensure t
-  :config
-  (require 'spaceline-config)
-  (setq powerline-default-separator (quote arrow))
-  (spaceline-spacemacs-theme))
+  :init (doom-modeline-mode 1)
+  :custom (doom-modeline height 15))
+(use-package all-the-icons
+  :ensure t)
 
-
+(use-package doom-themes
+      :if window-system
+      :ensure t
+      :config
+      (load-theme 'doom-tokyo-night t)
+      (doom-themes-org-config))
 ;;Auto written by emacs
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
